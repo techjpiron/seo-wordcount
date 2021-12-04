@@ -3,5 +3,5 @@ import Home from "../pages"
 
 it("should render", () => {
   render(<Home />)
-  expect(screen.getByText(/hello/i)).toBeInTheDocument()
+  expect(screen.getByLabelText(/to count/i)).toBeVisible()
 })
