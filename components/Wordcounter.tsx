@@ -25,7 +25,9 @@ const Wordcounter: FC<{ id: Field["id"]; hasFocus: boolean }> = ({
         ref={ref}
         onFocus={() => dispatch(updateFocus({ id }))}
       />
-      <p className="col-span-1 text-xl font-bold">{value.length}</p>
+      <p className="col-span-1 text-gray-700 text-xl font-bold">
+        {value.length}
+      </p>
     </>
   )
 }

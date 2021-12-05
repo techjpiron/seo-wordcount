@@ -2,12 +2,12 @@ import { configureStore } from "@reduxjs/toolkit"
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux"
 import fieldSlice from "./fieldSlice"
 
-export const createAppStore = () =>
+export const configureAppStore = () =>
   configureStore({
     reducer: fieldSlice,
   })
 
-const store = createAppStore()
+const store = configureAppStore()
 
 export type RootState = ReturnType<typeof store.getState>
 export type AppDispatch = typeof store.dispatch

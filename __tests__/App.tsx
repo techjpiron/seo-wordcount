@@ -45,3 +45,29 @@ describe("add", () => {
     })
   })
 })
+
+describe("reset", () => {
+  it("should have a reset button", () => {
+    render(<Home />)
+
+    expect(screen.getByRole("button", { name: /reset/i })).toBeInTheDocument()
+  })
+  it("should remove reset all word counters when the reset button is clicked", async () => {
+    render(<Home />)
+
+    // create three additionnal word counters
+    const addButtonEl = screen.getByRole("button", { name: /add/i })
+    userEvent.click(addButtonEl)
+    userEvent.click(addButtonEl)
+    userEvent.click(addButtonEl)
+
+    // reset
+    const resetButtonEl = screen.getByRole("button", { name: /reset/i })
+    userEvent.click(resetButtonEl)
+
+    // expect to see only one word counter
+    await waitFor(() => {
+      expect(screen.queryAllByLabelText(/to count/i).length).toEqual(1)
+    })
+  })
+})

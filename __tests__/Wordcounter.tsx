@@ -1,4 +1,5 @@
-import { render, screen } from "test-utils"
+import { render } from "test-utils"
+import { screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import Wordcounter from "../components/Wordcounter"
 

@@ -1,23 +1,17 @@
-import { FC, ReactElement } from "react"
+import React, { FC, ReactElement } from "react"
+import * as RTL from "@testing-library/react"
 import { Provider } from "react-redux"
-import { createAppStore } from "../store"
-import { render as rtlRender, RenderOptions } from "@testing-library/react"
+import { configureAppStore } from "../store"
 
-type WithStore = {
-  store?: ReturnType<typeof createAppStore>
-}
-type RenderOptionsWithStore = Omit<RenderOptions, "wrapper"> & WithStore
-
-const render = (ui: ReactElement, renderOptions?: RenderOptionsWithStore) => {
-  const Wrapper: FC = ({ children }) => {
-    return (
-      <Provider store={renderOptions?.store ?? createAppStore()}>
-        {children}
-      </Provider>
-    )
-  }
-  return rtlRender(ui, { wrapper: Wrapper, ...renderOptions })
+const AllTheProviders: FC = ({ children }) => {
+  const store = configureAppStore()
+  return <Provider store={store}>{children}</Provider>
 }
 
-export * from "@testing-library/react"
+const render = (
+  ui: ReactElement,
+  options?: Omit<RTL.RenderOptions, "wrapper">
+) => RTL.render(ui, { wrapper: AllTheProviders, ...options })
+
 export { render }
+export * from "@testing-library/react"

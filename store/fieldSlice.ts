@@ -24,12 +24,15 @@ export const fieldSlice = createSlice({
       state.fields.push({ id: newFieldId, value: action.payload.value ?? "" })
       state.focus = newFieldId
     },
+    reset: () => {
+      return initialState
+    },
     updateFocus: (state, action: PayloadAction<{ id: Field["id"] }>) => {
       state.focus = action.payload.id
     },
   },
 })
 
-export const { add, updateFocus } = fieldSlice.actions
+export const { add, updateFocus, reset } = fieldSlice.actions
 
 export default fieldSlice.reducer
