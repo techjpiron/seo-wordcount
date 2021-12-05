@@ -1,15 +1,15 @@
-import { render, screen } from "@testing-library/react"
+import { render, screen } from "test-utils"
 import userEvent from "@testing-library/user-event"
 import Wordcounter from "../components/Wordcounter"
 
 it("should have a input field", () => {
-  render(<Wordcounter />)
+  render(<Wordcounter id="d" hasFocus={false} />)
 
   expect(screen.getByLabelText(/to count/i)).toBeInTheDocument()
 })
 
 it("should have a word count", () => {
-  render(<Wordcounter />)
+  render(<Wordcounter id="d" hasFocus={true} />)
 
   const inputEl = screen.getByLabelText(/to count/i)
   userEvent.type(inputEl, "123456789")
