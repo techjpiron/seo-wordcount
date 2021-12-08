@@ -1,20 +1,18 @@
 import {
   FC,
   useEffect,
-  useState,
   useRef,
   KeyboardEventHandler,
-  KeyboardEvent,
+  ChangeEventHandler,
 } from "react"
 import { useAppDispatch } from "../store"
-import { add, Field, updateFocus } from "../store/fieldSlice"
+import { add, Field, updateFocus, update } from "../store/fieldSlice"
+import handleShortcut from "../utils/handleShortcut"
 
-const Wordcounter: FC<{ id: Field["id"]; hasFocus: boolean }> = ({
-  id,
+const Wordcounter: FC<{ field: Field; hasFocus: boolean }> = ({
+  field: { id, value },
   hasFocus,
 }) => {
-  const [value, setValue] = useState("")
-
   const dispatch = useAppDispatch()
 
   const ref = useRef<HTMLInputElement>(null)
@@ -25,22 +23,18 @@ const Wordcounter: FC<{ id: Field["id"]; hasFocus: boolean }> = ({
     }
   })
 
-  const handleShortcut = (
-    event: KeyboardEvent<HTMLInputElement>,
-    condition: boolean,
-    callback: KeyboardEventHandler<HTMLInputElement>
-  ) => {
-    if (condition) {
-      event.preventDefault()
-      event.stopPropagation()
-      callback(event)
-    }
-  }
+  const onChange: ChangeEventHandler<HTMLInputElement> = (event) =>
+    dispatch(update({ id, changes: { value: event.target.value } }))
+
   const onKeyDown: KeyboardEventHandler<HTMLInputElement> = (event) => {
     handleShortcut(event, event.key === "j" && event.ctrlKey, () =>
       dispatch(add({}))
     )
+    handleShortcut(event, event.key === "J" && event.ctrlKey, () =>
+      dispatch(add({ value }))
+    )
   }
+  const length = value.length
 
   return (
     <>
@@ -49,14 +43,12 @@ const Wordcounter: FC<{ id: Field["id"]; hasFocus: boolean }> = ({
         type="text"
         aria-label="Text you want to count the caracters within"
         value={value}
-        onChange={(event) => setValue(event.target.value)}
+        onChange={onChange}
         ref={ref}
         onFocus={() => dispatch(updateFocus({ id }))}
         onKeyDown={onKeyDown}
       />
-      <p className="col-span-1 text-gray-700 text-xl font-bold">
-        {value.length}
-      </p>
+      <p className="col-span-1 text-gray-700 text-xl font-bold">{length}</p>
     </>
   )
 }

@@ -5,6 +5,7 @@ import {
   createEntityAdapter,
   EntityState,
   createSelector,
+  Update,
 } from "@reduxjs/toolkit"
 import { RootState } from "."
 
@@ -50,6 +51,9 @@ export const fieldSlice = createSlice({
         },
       }),
     },
+    update: (state, action: PayloadAction<Update<Field>>) => {
+      fieldAdapter.updateOne(state, action.payload)
+    },
     reset: () => {
       return createInitialStore()
     },
@@ -59,10 +63,14 @@ export const fieldSlice = createSlice({
   },
 })
 
-export const { add, updateFocus, reset } = fieldSlice.actions
+export const { add, updateFocus, reset, update } = fieldSlice.actions
 
-const { selectAll } = fieldAdapter.getSelectors((state: RootState) => state)
+const { selectAll, selectById } = fieldAdapter.getSelectors(
+  (state: RootState) => state
+)
+
 const order = (state: RootState) => state.order
+export const selectFieldById = selectById
 export const selectAllFields = createSelector(
   [selectAll, order],
   (fields, order) =>

@@ -24,7 +24,7 @@ const App: FC = () => {
           {fields.map((field) => (
             <Wordcounter
               key={field.id}
-              id={field.id}
+              field={field}
               hasFocus={focus === field.id}
             />
           ))}
