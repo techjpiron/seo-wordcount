@@ -92,7 +92,7 @@ const HelpModal: FC = () => {
                             </tr>
                             <tr>
                               <td className="px-6 py-4 whitespace-nowrap">
-                                CTRL+R
+                                CTRL+K
                               </td>
                               <td className="px-6 py-4 whitespace-nowrap">
                                 Reset current field
@@ -100,7 +100,7 @@ const HelpModal: FC = () => {
                             </tr>
                             <tr>
                               <td className="px-6 py-4 whitespace-nowrap">
-                                CTRL+SHIFT+R
+                                CTRL+SHIFT+K
                               </td>
                               <td className="px-6 py-4 whitespace-nowrap">
                                 Reset all fields
