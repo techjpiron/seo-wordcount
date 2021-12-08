@@ -1,10 +1,14 @@
 import { configureStore } from "@reduxjs/toolkit"
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux"
 import fieldSlice from "./fieldSlice"
+import modalSlice from "./modalSlice"
 
 export const configureAppStore = () =>
   configureStore({
-    reducer: fieldSlice,
+    reducer: {
+      fields: fieldSlice,
+      modal: modalSlice,
+    },
   })
 
 const store = configureAppStore()

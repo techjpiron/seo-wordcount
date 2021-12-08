@@ -66,10 +66,10 @@ export const fieldSlice = createSlice({
 export const { add, updateFocus, reset, update } = fieldSlice.actions
 
 const { selectAll, selectById } = fieldAdapter.getSelectors(
-  (state: RootState) => state
+  (state: RootState) => state.fields
 )
 
-const order = (state: RootState) => state.order
+const order = (state: RootState) => state.fields.order
 export const selectFieldById = selectById
 export const selectAllFields = createSelector(
   [selectAll, order],
