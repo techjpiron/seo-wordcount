@@ -1,12 +1,12 @@
 import { FC } from "react"
 import { useAppDispatch, useAppSelector } from "../store"
-import { add, reset } from "../store/fieldSlice"
+import { add, reset, selectAllFields } from "../store/fieldSlice"
 import Wordcounter from "./Wordcounter"
 import Button from "./Button"
 
 const App: FC = () => {
   const dispatch = useAppDispatch()
-  const fields = useAppSelector((state) => state.fields)
+  const fields = useAppSelector(selectAllFields)
   const focus = useAppSelector((state) => state.focus)
   return (
     <main className="min-h-screen p-16 flex justify-center bg-gradient-to-br from-sky-400 to-blue-600">
