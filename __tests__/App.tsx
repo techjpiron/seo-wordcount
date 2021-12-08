@@ -44,6 +44,17 @@ describe("add", () => {
       expect(screen.queryAllByLabelText(/to count/i)[1]).toHaveFocus()
     })
   })
+
+  it("should have a keyboard short cut to add a new counter", async () => {
+    render(<Home />)
+
+    const wordCounterEl = screen.getByLabelText(/to count/i)
+    userEvent.type(wordCounterEl, "{ctrl}j")
+
+    await waitFor(() => {
+      expect(screen.queryAllByLabelText(/to count/i).length).toEqual(2)
+    })
+  })
 })
 
 describe("reset", () => {
