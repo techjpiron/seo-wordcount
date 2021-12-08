@@ -6,7 +6,7 @@ import {
   ChangeEventHandler,
 } from "react"
 import { useAppDispatch } from "../store"
-import { add, Field, updateFocus, update } from "../store/fieldSlice"
+import { add, Field, updateFocus, update, reset } from "../store/fieldSlice"
 import handleShortcut from "../utils/handleShortcut"
 
 const Wordcounter: FC<{ field: Field; hasFocus: boolean }> = ({
@@ -32,6 +32,12 @@ const Wordcounter: FC<{ field: Field; hasFocus: boolean }> = ({
     )
     handleShortcut(event, event.key === "J" && event.ctrlKey, () =>
       dispatch(add({ value }))
+    )
+    handleShortcut(event, event.key === "k" && event.ctrlKey, () =>
+      dispatch(update({ id, changes: { value: "" } }))
+    )
+    handleShortcut(event, event.key === "K" && event.ctrlKey, () =>
+      dispatch(reset())
     )
   }
   const length = value.length
