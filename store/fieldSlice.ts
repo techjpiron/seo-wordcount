@@ -9,6 +9,10 @@ type FieldStore = {
   focus: Field["id"]
 }
 
+const createEmptyField = (): Field => ({
+  id: nanoid(),
+  value: "",
+})
 const initialId = nanoid()
 const initialState: FieldStore = {
   fields: [{ id: initialId, value: "" }],
@@ -19,10 +23,17 @@ export const fieldSlice = createSlice({
   name: "fields",
   initialState,
   reducers: {
-    add: (state, action: PayloadAction<{ value?: Field["value"] }>) => {
-      const newFieldId = nanoid()
-      state.fields.push({ id: newFieldId, value: action.payload.value ?? "" })
-      state.focus = newFieldId
+    add: {
+      reducer: (state, action: PayloadAction<Field>) => {
+        state.fields.push(action.payload)
+        state.focus = action.payload.id
+      },
+      prepare: (field: Partial<Field>) => ({
+        payload: {
+          ...createEmptyField(),
+          ...field,
+        },
+      }),
     },
     reset: () => {
       return initialState
