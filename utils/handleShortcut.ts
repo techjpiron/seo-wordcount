@@ -1,9 +1,9 @@
 import { KeyboardEvent, KeyboardEventHandler } from "react"
 
 const handleShortcut = (
-  event: KeyboardEvent<HTMLInputElement>,
+  event: KeyboardEvent<HTMLTextAreaElement>,
   condition: boolean,
-  callback: KeyboardEventHandler<HTMLInputElement>
+  callback: KeyboardEventHandler<HTMLTextAreaElement>
 ) => {
   if (condition) {
     event.preventDefault()

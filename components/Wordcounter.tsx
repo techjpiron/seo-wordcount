@@ -15,7 +15,7 @@ const Wordcounter: FC<{ field: Field; hasFocus: boolean }> = ({
 }) => {
   const dispatch = useAppDispatch()
 
-  const ref = useRef<HTMLInputElement>(null)
+  const ref = useRef<HTMLTextAreaElement>(null)
 
   useEffect(() => {
     if (hasFocus) {
@@ -23,10 +23,10 @@ const Wordcounter: FC<{ field: Field; hasFocus: boolean }> = ({
     }
   })
 
-  const onChange: ChangeEventHandler<HTMLInputElement> = (event) =>
+  const onChange: ChangeEventHandler<HTMLTextAreaElement> = (event) =>
     dispatch(update({ id, changes: { value: event.target.value } }))
 
-  const onKeyDown: KeyboardEventHandler<HTMLInputElement> = (event) => {
+  const onKeyDown: KeyboardEventHandler<HTMLTextAreaElement> = (event) => {
     handleShortcut(event, event.key === "j" && event.ctrlKey, () =>
       dispatch(add({}))
     )
@@ -44,9 +44,8 @@ const Wordcounter: FC<{ field: Field; hasFocus: boolean }> = ({
 
   return (
     <>
-      <input
+      <textarea
         className="col-span-5 px-4 py-2 rounded border-2 border-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50"
-        type="text"
         aria-label="Text you want to count the caracters within"
         value={value}
         onChange={onChange}
