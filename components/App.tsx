@@ -1,4 +1,5 @@
 import { FC } from "react"
+import { motion } from "framer-motion"
 import { useAppDispatch, useAppSelector } from "../store"
 import { add, reset, selectAllFields } from "../store/fieldSlice"
 import Wordcounter from "./Wordcounter"
@@ -27,7 +28,7 @@ const App: FC = () => {
               <Button onClick={() => dispatch(toggle())}>Help</Button>
             </div>
           </nav>
-          <div className="mt-8 p-8 bg-white rounded-xl grid grid-cols-6 gap-4 items-center">
+          <motion.div className="mt-8 p-8 bg-white rounded-xl flex-col space-y-4">
             {fields.map((field) => (
               <Wordcounter
                 key={field.id}
@@ -35,7 +36,7 @@ const App: FC = () => {
                 hasFocus={focus === field.id}
               />
             ))}
-          </div>
+          </motion.div>
         </div>
       </main>
     </>
