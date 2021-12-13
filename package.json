@@ -38,9 +38,9 @@
     "intersection-observer": "^0.12.0",
     "jest": "^27.4.3",
     "lint-staged": "^12.1.2",
-    "postcss": "^8.4.4",
+    "postcss": "^8.4.5",
     "prettier": "^2.5.1",
-    "tailwindcss": "^3.0.0-alpha.2",
+    "tailwindcss": "^3.0.1",
     "typescript": "4.5.2"
   },
   "version": "0.0.0"
