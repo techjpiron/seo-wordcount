@@ -5,7 +5,7 @@ import {
   KeyboardEventHandler,
   ChangeEventHandler,
 } from "react"
-import { AnimatePresence, motion } from "framer-motion"
+import { motion } from "framer-motion"
 import { useAppDispatch } from "../store"
 import { add, Field, updateFocus, update, reset } from "../store/fieldSlice"
 import handleShortcut from "../utils/handleShortcut"

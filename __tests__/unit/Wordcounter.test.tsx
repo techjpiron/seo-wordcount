@@ -1,5 +1,5 @@
 import { render, screen } from "test-utils"
-import Wordcounter from "../components/Wordcounter"
+import Wordcounter from "../../components/Wordcounter"
 
 it("should have a input field", () => {
   render(<Wordcounter field={{ id: "1", value: "" }} hasFocus={false} />)
@@ -12,5 +12,5 @@ it("should have a word count", () => {
     <Wordcounter field={{ id: "1", value: "Hello world!" }} hasFocus={true} />
   )
 
-  expect(screen.getByText("12")).toBeVisible()
+  expect(screen.getByText("12")).toBeInTheDocument()
 })
